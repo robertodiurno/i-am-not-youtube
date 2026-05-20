@@ -69,6 +69,7 @@ concurrency:
 
 jobs:
   build-integrations:
+    if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc }}
     uses: ./.github/workflows/_build_integrations.yml
     with:
       enable_youpip: ${{ inputs.enable_youpip }}
@@ -82,11 +83,13 @@ jobs:
     name: Package IPA
     runs-on: macos-latest
     needs: build-integrations
+    if: ${{ always() }}
     permissions:
       contents: write
 
     steps:
       - name: Download built debs
+        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc }}
         uses: actions/download-artifact@v4
         with:
           name: built-debs
