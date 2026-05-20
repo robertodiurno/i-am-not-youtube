@@ -108,7 +108,8 @@ jobs:
 
       - name: Download core tweaks
         run: |
-          deb_url="https://github.com/${{ github.repository }}/releases/download/v${{ github.event.inputs.tweak_version }}/ianyt.${{ github.event.inputs.tweak_version }}.deb"
+          deb_url="https://github.com/ahmtydn/i-am-not-youtube/releases/download/v${{ github.event.inputs.tweak_version }}/ianyt.${{ github.event.inputs.tweak_version }}.deb"
+
           wget "$deb_url" --no-verbose -O core.deb
 
       - name: Install cyan
